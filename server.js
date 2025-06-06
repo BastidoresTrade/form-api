@@ -1,4 +1,6 @@
 // server.js
+app.use(express.urlencoded({ extended: true })); // Isso é ESSENCIAL para ler dados vindos de formulários HTML
+app.use(express.json()); // Isso continua útil caso você use JSON também
 import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
