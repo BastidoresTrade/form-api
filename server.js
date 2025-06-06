@@ -24,7 +24,7 @@ app.post('/enviar-email', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: \`\${name} <\${email}>\`,
+      from: `${name} <${email}>`,
       to: process.env.EMAIL_USER,
       subject: subject || 'Nova mensagem do site',
       html: \`
