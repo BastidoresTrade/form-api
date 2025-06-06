@@ -1,6 +1,4 @@
 // server.js
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
