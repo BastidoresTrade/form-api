@@ -1,3 +1,4 @@
+// server.js
 import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
@@ -6,16 +7,14 @@ import 'dotenv/config';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware para processar JSON e dados de formulário
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // Necessário para ler dados de formulário padrão
 
 app.post('/enviar-email', async (req, res) => {
   const { name, email, subject, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).send('Campos obrigatórios ausentes.');
+    return res.status(400).send('Campos obrigatórios não preenchidos.');
   }
 
   const transporter = nodemailer.createTransport({
@@ -30,7 +29,7 @@ app.post('/enviar-email', async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: `${name} <${email}>`,
+      from: `"${name}" <${email}>`,
       to: process.env.EMAIL_USER,
       subject: subject || 'Nova mensagem do site',
       html: `
@@ -43,7 +42,7 @@ app.post('/enviar-email', async (req, res) => {
 
     res.status(200).send('E-mail enviado com sucesso!');
   } catch (err) {
-    console.error('Erro ao enviar email:', err);
+    console.error('Erro ao enviar e-mail:', err);
     res.status(500).send('Erro ao enviar o e-mail.');
   }
 });
