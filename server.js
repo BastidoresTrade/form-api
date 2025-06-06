@@ -7,9 +7,16 @@ import 'dotenv/config';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Permitir requisições CORS
 app.use(cors());
+
+// Aceitar JSON no corpo da requisição
 app.use(express.json());
 
+// Aceitar dados de formulário HTML (x-www-form-urlencoded)
+app.use(express.urlencoded({ extended: true }));
+
+// Rota de envio de e-mail
 app.post('/enviar-email', async (req, res) => {
   const { name, email, subject, message } = req.body;
 
@@ -47,6 +54,7 @@ app.post('/enviar-email', async (req, res) => {
   }
 });
 
+// Inicia o servidor
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
