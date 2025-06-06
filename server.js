@@ -27,12 +27,12 @@ app.post('/enviar-email', async (req, res) => {
       from: `${name} <${email}>`,
       to: process.env.EMAIL_USER,
       subject: subject || 'Nova mensagem do site',
-      html: \`
-        <p><strong>Nome:</strong> \${name}</p>
-        <p><strong>E-mail:</strong> \${email}</p>
-        <p><strong>Assunto:</strong> \${subject}</p>
-        <p><strong>Mensagem:</strong><br/>\${message}</p>
-      \`
+      html: `
+        <p><strong>Nome:</strong> ${name}</p>
+        <p><strong>E-mail:</strong> ${email}</p>
+        <p><strong>Assunto:</strong> ${subject}</p>
+        <p><strong>Mensagem:</strong><br/>${message}</p>
+      `
     });
 
     res.status(200).send('E-mail enviado com sucesso!');
@@ -43,5 +43,5 @@ app.post('/enviar-email', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(\`Servidor rodando na porta \${PORT}\`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
